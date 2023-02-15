@@ -1,0 +1,36 @@
+version: "3"
+
+services:
+  django:
+    image: django-stripe:latest
+    container_name: django-stripe
+    volumes:
+      - static_volume:/project/static
+    env_file:
+      - .env
+    command: >
+      bash -c "python manage.py collectstatic --noinput && \
+      python manage.py migrate && \
+      gunicorn -b 0.0.0.0:8000 config.wsgi:application"
+  nginx:
+    build:
+      dockerfile: ./Dockerfile
+      context: ./docker/nginx/
+    container_name: ds-nginx
+    image: ds-nginx
+    volumes:
+      - static_volume:/project/static
+    depends_on:
+      - django
+    ports:
+      - "80:80"
+  stripe-cli:
+    image: stripe/stripe-cli
+    container_name: stripe-cli
+    command: "listen --api-key ${STRIPE_SECRET_KEY} --device-name 'docker-cli' --forward-to nginx:80/webhooks/stripe/"
+    env_file:
+      - .env
+    depends_on:
+      - nginx
+volumes:
+  static_volume:

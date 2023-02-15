@@ -3,7 +3,7 @@ from ..models.item import Item
 from ..services.cart import Cart
 
 
-def create_order(item: Item, session_id: str) -> None:
+def create_order(item, session_id):
 	"""Creates an order for one product"""
 	new_order = Order(
 		order_id=session_id,
@@ -19,7 +19,7 @@ def create_order(item: Item, session_id: str) -> None:
 	new_order_item.save()
 
 
-def create_group_order(items: Cart, session_id) -> None:
+def create_group_order(items, session_id):
 	"""Creates an order for a product group"""
 	new_order = Order(
 		order_id=session_id,

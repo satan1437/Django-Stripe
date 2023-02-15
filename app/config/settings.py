@@ -15,8 +15,7 @@ STRIPE_WEBHOOK_SECRET = os.getenv('STRIPE_WEBHOOK_SECRET')
 
 DEBUG = os.getenv('DEBUG') == 'True'
 
-ALLOWED_HOSTS = []
-ALLOWED_HOSTS.extend(os.environ.get('SERVER_NAMES').split(' '))
+ALLOWED_HOSTS = ['exemplles.pythonanywhere.com']
 
 
 INSTALLED_APPS = [

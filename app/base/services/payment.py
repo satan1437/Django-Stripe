@@ -10,7 +10,7 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 IMAGE = ['https://i.imgur.com/EHyR2nP.png']  # FIXME
 
 
-def create_stripe_payment_intents(pk: int):
+def create_stripe_payment_intents(pk):
 	"""PaymentIntents"""
 	try:
 		customer = stripe.Customer.create()
@@ -30,7 +30,7 @@ def create_stripe_payment_intents(pk: int):
 		return {'error': str(e)}
 
 
-def create_stripe_session(pk: int) -> dict:  # TODO: make handler for exemptions
+def create_stripe_session(pk):  # TODO: make handler for exemptions
 	"""Checkout Session"""
 	product = Item.objects.get(id=pk)  # noqa
 	checkout_session = stripe.checkout.Session.create(  # TODO: create metadata
@@ -60,7 +60,7 @@ def create_stripe_session(pk: int) -> dict:  # TODO: make handler for exemptions
 	return {'session_id': checkout_session.id, 'session_url': checkout_session.get('url')}
 
 
-def create_group_stripe_session(list_items: list, items: Cart) -> str:
+def create_group_stripe_session(list_items, items):
 	"""Checkout Session"""
 	if not list_items:
 		return reverse_lazy('cart')
@@ -75,7 +75,7 @@ def create_group_stripe_session(list_items: list, items: Cart) -> str:
 	return checkout_session.get('url')
 
 
-def create_item_list(request) -> str:
+def create_item_list(request):
 	"""Creates and returns a list of items to buy"""
 	items = Cart(request)
 	line_items = []

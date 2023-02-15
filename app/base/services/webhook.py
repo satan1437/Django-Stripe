@@ -1,14 +1,13 @@
 import stripe
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
-from django.core.handlers.wsgi import WSGIRequest
 from django.http import HttpResponse
 from stripe.error import SignatureVerificationError
 
 from ..models.cart import Order
 
 
-def stripe_webhook(request: WSGIRequest) -> HttpResponse | None:
+def stripe_webhook(request):
 	payload = request.body
 	sig_header = request.META.get('HTTP_STRIPE_SIGNATURE')
 	event = None

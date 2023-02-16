@@ -64,7 +64,7 @@ class Cart:
 		self.session.modified = True
 
 
-def cart_handler(request, pk, mode):
+def cart_handler(request, pk, mode=False):
 	"""Adds or removes a product item"""
 	cart = Cart(request)
 	item = get_object_or_404(Item, pk=pk)

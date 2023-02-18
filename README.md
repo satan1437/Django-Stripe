@@ -1,3 +1,4 @@
+[![wakatime](https://wakatime.com/badge/user/4383046a-77b6-4e66-bd61-7e658de3cac8/project/f3b5159f-074d-4c55-845d-c4bc47ad2e92.svg)](https://wakatime.com/badge/user/4383046a-77b6-4e66-bd61-7e658de3cac8/project/f3b5159f-074d-4c55-845d-c4bc47ad2e92)
 #### Доступные переменные окружения:
 
 - `DEBUG` — Дебаг-режим Django.
@@ -29,12 +30,13 @@
 
 ### Url's
 
-`bu/<id>/` - Stripe Session \
-`cart/checkout/` - Stripe Session \
-`buy/intent/<id>` - <ins>StipeIntent</ins>
+`/buy/<id>/` - Stripe Session \
+`/cart/checkout/` - Stripe Session \
+`/buy/intent/<id>/` - <ins>StipeIntent</ins>
 
-`cart/` - Корзина товаров \
-`webhooks/stripe/` - Stripe WebHook
+`/cart/` - Корзина товаров \
+`/webhooks/stripe/` - Stripe WebHook
+
 ---
 
 #### Docker-compose:
